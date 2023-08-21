@@ -1,7 +1,7 @@
 # CIMSII-Midas_Ink_Control
-Python library for communicating with a Megnajet/Xaar CIMS II/HV/Midas ink control system.
+Python library for communicating with a Megnajet/Xaar CIMS II/HV/Midas ink system.
 
-This library uses RS422 communication with the CIMS II/Midas
+This library uses RS422 communication with the CIMS II/Midas ink system.
 
 # Dependencies
 
@@ -29,9 +29,9 @@ Midas.create_serial_connection('/dev/ttyUSB0', baudrate=115200,
 3) The different parameters of the Midas can be accessed through different sub-classes, as well as some through the main Midas class:
 
 ``` python
-Midas()
-Midas.Status()
-Midas.Pressures()
-Midas.Temperatures()
-Midas.Pumps()
-Midas.Purge()
+Midas() - general control and information
+Midas.Status() - alarms and status bits
+Midas.Pressures() - infeed, meniscus  parameters
+Midas.Temperatures() - heater parameters
+Midas.Pumps() - recirc and meiscus pumps
+Midas.Purge() - purge pressures and control

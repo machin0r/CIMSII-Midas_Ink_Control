@@ -770,6 +770,7 @@ class Midas:
         if midas_response is True:
             self.active_heads = heads
         return midas_response
+
     def get_bypass_time(self, node_id=0):
         '''Read bypass time
         Seconds (0-600)'''
