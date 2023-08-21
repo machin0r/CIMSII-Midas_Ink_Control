@@ -706,12 +706,7 @@ class Midas:
     '''This object holds the information regarding the Midas ink delivery system, 
     including the actual and demand values for various parameters.
     It has a number of functions to get/set different parameters and start the system'''
-    def __init__(self,  port, baudrate=115200,
-                                 stopbits=serial.STOPBITS_ONE,
-                                 parity=serial.PARITY_NONE,
-                                 databits=serial.EIGHTBITS, timeout=1):
-        self.serialconn =  MidasSerial(port, baudrate, stopbits,
-                                      parity, databits, timeout)
+    def __init__(self):
         self.status = Status(self.serialconn)
         self.pressures = Pressures(self.serialconn)
         self.temperature = Temperatures(self.serialconn)
@@ -731,9 +726,14 @@ class Midas:
         self.extended_enable_bits = {'actual': "", 'demand': ""}
         self.dynamic_calibration_state = {'actual': "", 'demand': ""}
 
-    def open_serial_connection(self):
+    def create_serial_connection(self, port, baudrate=115200,
+                                 stopbits=serial.STOPBITS_ONE,
+                                 parity=serial.PARITY_NONE,
+                                 databits=serial.EIGHTBITS, timeout=1):
         '''Create an instance of the MidasSerial class to talk to laser
         Default serial settings'''
+        self.serialconn = MidasSerial(port, baudrate, stopbits,
+                                              parity, databits, timeout)
         self.serialconn.open_connection()
 
     def close_serial(self):
