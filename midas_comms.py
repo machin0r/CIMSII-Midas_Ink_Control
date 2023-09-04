@@ -982,6 +982,3 @@ class Midas:
             self.dynamic_calibration_state['demand']= calibration
             self.get_dynamic_calibration_state(node_id)
         return midas_response
-
-
-help(Midas.get_dynamic_calibration_state)
