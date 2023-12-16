@@ -35,3 +35,27 @@ Midas.Pressures() - infeed, meniscus  parameters
 Midas.Temperatures() - heater parameters
 Midas.Pumps() - recirc and meiscus pumps
 Midas.Purge() - purge pressures and control
+
+
+# Common Enable Bits Combinations
+
+There are a few common enable bits that will most likely be used in all programs:
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|Value|Ink Enable Command|Recirc.  Command|Fill Pump Command|Description|
+|36922|0|0|0|Off|
+|32896|0|0|1|Off|
+|36933|1|0|0|Off|
+|37001|1|1|0|Turns on the recirculation and enables printing|
+|32897|1|0|1|Fills reservoir - needs 32905 sending first|
+|32905|1|1|1|Fills reservoir when needed, prints|
+
+NOTE: There is a quirk with having just the fill pump on, the system must be fully enabled, and then the recirculation and enable printing disabled.
+
+They can be set using:
+
+``` python
+Midas.set_enable_bits(32905)  # Fully enable the Miday system
+
+This is equivilent to sending ``SEB,32905\r`` through the serial port.
