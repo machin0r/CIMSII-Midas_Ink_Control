@@ -56,7 +56,7 @@ NOTE: There is a quirk with having just the fill pump on, the system must be ful
 They can be set using:
 
 ``` python
-Midas.set_enable_bits(32905)  # Fully enable the Midas system
+Midas.set_enable_bits("32905")  # Fully enable the Midas system
 ```
 
 This is equivilent to sending ``SEB,32905\r`` through the serial port.
