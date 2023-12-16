@@ -35,7 +35,7 @@ Midas.Pressures() - infeed, meniscus  parameters
 Midas.Temperatures() - heater parameters
 Midas.Pumps() - recirc and meiscus pumps
 Midas.Purge() - purge pressures and control
-
+```
 
 # Common Enable Bits Combinations
 
@@ -57,5 +57,6 @@ They can be set using:
 
 ``` python
 Midas.set_enable_bits(32905)  # Fully enable the Miday system
+```
 
 This is equivilent to sending ``SEB,32905\r`` through the serial port.
