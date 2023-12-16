@@ -1,8 +1,11 @@
 '''This module is for controlling a Megnajet/Xaar CIMSII/Midas (referred to as Midas) ink delivery
 system for an inkjet printer. node_id is used for multiple midas systems on the same COM port,
-it should be left as the default 0 (or not passed as an argument) for single systems'''
+it should be left as the default 0 (or not passed as an argument) for single systems.
+The Midas has an odd quirk where there has to be a 4ms delay between each character on the write 
+'''
 import serial
 from serial import SerialException
+import time
 
 
 class MidasSerial:
@@ -40,7 +43,9 @@ class MidasSerial:
             network_address = chr(ord('@')+node_id)
             command = network_address + command
         if self.serial.is_open:
-            self.serial.write(bytes(command, 'utf-8'))
+            for char in command:
+                self.serial.write(bytes(char, 'utf-8'))
+                time.sleep(0.004)
 
     def serial_response(self, response_type):
         '''Reads the response from the Midas to check if the command was successful
@@ -890,7 +895,7 @@ class Midas:
 
     def set_enable_bits(self, enable_bits, node_id=0):
         '''Set enable bits to define system functionality
-        Decimal representing binary value (0- 65535)
+        Integer representing binary value (0 - 65535)
         00000000 00000001 enables ink
         00000000 00000010 enable Tank heater
         00000000 00000100 enable External heater
@@ -917,7 +922,7 @@ class Midas:
 
     def get_extended_enable_bits(self, node_id=0):
         '''Read extended enables
-        Decimal representing binary value (0- 65535)
+        Integer representing binary value (0 - 65535)
         00000000 00000001 disables system enable on power off
         00000000 00000010 disables PID loop separation algorithm(manifold systems)
         00000000 00000100 disables fill purge blocking
