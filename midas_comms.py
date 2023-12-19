@@ -3,9 +3,9 @@ system for an inkjet printer. node_id is used for multiple midas systems on the 
 it should be left as the default 0 (or not passed as an argument) for single systems.
 The Midas has an odd quirk where there has to be a 4ms delay between each character on the write 
 '''
+import time
 import serial
 from serial import SerialException
-import time
 
 
 class MidasSerial:
